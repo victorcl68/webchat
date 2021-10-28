@@ -5,14 +5,16 @@ const app = express();
 const http = require('http').createServer(app);
 const cors = require('cors');
 
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 const io = require('socket.io')(http, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: 'http://localhost:3000/',
     methods: ['GET', 'POST'],
   },
 });
+
+const { chatController } = require('./controllers');
 
 require('./sockets/chat')(io);
 
@@ -20,9 +22,8 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.use(cors());
+app.use(express.static(`${__dirname}/public`));
 
-app.get('/', (_req, res) => {
-  res.render('index');
-});
+app.get('/', chatController);
 
-http.listen(port, () => console.log(`Rodando na porta ${port}`));
+http.listen(PORT, () => console.log(`Rodando na porta ${PORT}`));
