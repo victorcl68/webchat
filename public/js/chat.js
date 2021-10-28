@@ -6,7 +6,7 @@ const nicknameValue = document.querySelector('.nicknameInput');
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  socket.emit('clientMessage', 
+  socket.emit('message', 
     { chatMessage: chatMessageValue.value, nickname: nicknameValue.value });
   chatMessageValue.value = '';
   nicknameValue.value = '';
@@ -31,6 +31,11 @@ const createMessage = (nickname, chatMessage) => {
   const li = document.createElement('li');
   li.innerText = `${nowDateFormatted()} - ${nickname}: ${chatMessage} `;
   messagesUl.appendChild(li);
+  return false;
 };
 
 socket.on('serverMessage', ({ nickname, chatMessage }) => createMessage(nickname, chatMessage));
+
+window.onbeforeunload = () => {
+  socket.disconnect();
+};
