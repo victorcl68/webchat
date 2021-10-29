@@ -47,3 +47,21 @@ const createMessage = (message) => {
 
   messagesUl.appendChild(li);
 };
+
+nicknameSaveButton.addEventListener('click', () => {
+  nickname = nicknameValue.value;
+  nicknameValue.value = '';
+
+  deleteLastNickname();
+  createNickname();
+});
+
+sendButton.addEventListener('click', () => {
+  const onlineUser = sessionStorage.getItem('nickname');
+  
+  socket.emit('message', 
+    { chatMessage: chatMessageValue.value, nickname: onlineUser });
+
+  chatMessageValue.value = '';
+  nicknameValue.value = '';
+});
