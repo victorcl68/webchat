@@ -65,3 +65,10 @@ sendButton.addEventListener('click', () => {
   chatMessageValue.value = '';
   nicknameValue.value = '';
 });
+
+socket.on('message', (message) => createMessage(message));
+
+window.onload = () => {
+  nickname = randomNickname(16);
+  createNickname();
+};
