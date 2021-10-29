@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
   <head>
-    <title>WebChat</title>
-    <!-- <link rel="stylesheet" href="./css/chat.css"> -->
+    <meta charset="UTF-8">
+    <title>Web Chat Trybe Project - Victor</title>
   </head>
   <body>
+    <div class="titleDiv"></div>
     <ul class="messages"></ul>
-    <form action="">
-      <input class="nicknameInput" autocomplete="off" />
-      <input class="messageInput" autocomplete="off" />
-      <button>Enviar</button>
-    </form>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src='./js/chat.js'></script>
+    <input type="text" class="nicknameInput" data-testid="nickname-box">
+    <button class="nicknameSaveButton" data-testid="nickname-button">Salvar</button>
+    <input type="text" class="messageInput" data-testid="message-box">
+    <button class="sendButton" data-testid="send-button">Enviar</button>
   </body>
-</html>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src='./js/chat.js'></script>
+</html> 
