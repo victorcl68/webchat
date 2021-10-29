@@ -31,11 +31,13 @@ const createNickname = () => {
   sessionStorage.setItem('nickname', nickname);
 
   titleDiv.appendChild(h1);
+  return false;
 };
 
 const deleteLastNickname = () => {
   const onlineUser = document.querySelector('.onlineUser');
   onlineUser.remove();
+  return false;
 };
 
 const createMessage = (message) => {
@@ -46,6 +48,7 @@ const createMessage = (message) => {
   li.setAttribute('data-testid', 'message');
 
   messagesUl.appendChild(li);
+  return false;
 };
 
 nicknameSaveButton.addEventListener('click', () => {
@@ -54,16 +57,22 @@ nicknameSaveButton.addEventListener('click', () => {
 
   deleteLastNickname();
   createNickname();
+  return false;
 });
 
 sendButton.addEventListener('click', () => {
   const onlineUser = sessionStorage.getItem('nickname');
+  const timestamp = new Date();
   
   socket.emit('message', 
     { chatMessage: chatMessageValue.value, nickname: onlineUser });
 
+  socket.emit('messageInfo', 
+    { message: chatMessageValue.value, nickname: onlineUser, timestamp });
+  
   chatMessageValue.value = '';
   nicknameValue.value = '';
+  return false;
 });
 
 socket.on('message', (message) => createMessage(message));
