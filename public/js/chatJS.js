@@ -32,6 +32,12 @@ const createNickname = () => {
 
   titleDiv.appendChild(h1);
 };
+
+const deleteLastNickname = () => {
+  const onlineUser = document.querySelector('.onlineUser');
+  onlineUser.remove();
+};
+
 const createMessage = (message) => {
   const messagesUl = document.querySelector('.messages');
   const li = document.createElement('li');
