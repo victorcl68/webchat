@@ -3,25 +3,27 @@ const express = require('express');
 
 const app = express();
 const http = require('http').createServer(app);
+const cors = require('cors');
 
-const PORT = 3000;
+const port = process.env.PORT || 3000;
 
 const io = require('socket.io')(http, {
   cors: {
-    origin: 'http://localhost:3000/',
+    origin: `http://localhost:${port}`,
     methods: ['GET', 'POST'],
   },
 });
 
-const { chatController } = require('./controllers');
+require('./sockets/chatSocket')(io);
 
-require('./sockets/chat')(io);
+const { chatRouter } = require('./routers');
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.use(express.static(`${__dirname}/public`));
+app.use(cors());
 
-app.get('/', chatController);
+app.use('/', chatRouter);
 
-http.listen(PORT, () => console.log(`Rodando na porta ${PORT}`));
+http.listen(port, () => console.log(`Rodando na porta ${port}`));
