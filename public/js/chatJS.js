@@ -19,3 +19,25 @@ const randomNickname = (length) => {
 
   return result;
 };
+
+const createNickname = () => {
+  const h1 = document.createElement('h1');
+  const titleDiv = document.querySelector('.titleDiv');
+
+  h1.setAttribute('data-testid', 'online-user');
+  h1.className = 'onlineUser';
+  h1.innerText = nickname;
+
+  sessionStorage.setItem('nickname', nickname);
+
+  titleDiv.appendChild(h1);
+};
+const createMessage = (message) => {
+  const messagesUl = document.querySelector('.messages');
+  const li = document.createElement('li');
+
+  li.innerText = message;
+  li.setAttribute('data-testid', 'message');
+
+  messagesUl.appendChild(li);
+};
