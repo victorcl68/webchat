@@ -2,16 +2,14 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8">
-    <title>Web Chat Trybe Project - Victor</title>
+    <title>Web Chat</title>
   </head>
   <body>
     <div class="titleDiv"></div>
     <ul class="messages">
-      <% if (allMessages.length > 0) {%>
         <% allMessages.forEach((message) => { %>
-          <li data-testid="message"><%= `${message.timestamp} - ${message.nickname}: ${message.message}` %></li>
+          <li data-testid="message"><%= message.message %></li>
         <% }) %>
-      <% } %>
     </ul>
       <input type="text" class="nicknameInput" data-testid="nickname-box">
     <button class="nicknameSaveButton" data-testid="nickname-button">Salvar</button>
