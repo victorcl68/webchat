@@ -2,20 +2,24 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8">
-    <title>Web Chat</title>
+    <title>Project Web Chat Trybe - Victor</title>
   </head>
   <body>
-    <div class="titleDiv"></div>
+    <section class="titleSection"></section>
+
     <ul class="onlineUsers"></ul>
+
     <ul class="messages">
-        <% allMessages.forEach((message) => { %>
-          <li data-testid="message"><%= message.message %></li>
-        <% }) %>
+    <% allMessages.forEach(({ message }) => { %>
+      <li data-testid="message"><%= message %></li>
+    <% }) %>
     </ul>
-      <input type="text" class="nicknameInput" data-testid="nickname-box">
+
+    <input type="text" class="nicknameInput" data-testid="nickname-box">
     <button class="nicknameSaveButton" data-testid="nickname-button">Salvar</button>
+
     <input type="text" class="messageInput" data-testid="message-box">
-    <button class="sendButton" data-testid="send-button">Enviar</button>
+    <button class="sendMessageButton" data-testid="send-button">Enviar</button>
   </body>
   <script src="/socket.io/socket.io.js"></script>
   <script src='./js/chatJS.js'></script>
