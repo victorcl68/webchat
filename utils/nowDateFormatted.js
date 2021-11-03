@@ -1,7 +1,8 @@
 module.exports = (dataParam) => {
   let data = '';
+
   if (dataParam) data = dataParam;
-  data = new Date();
+  else data = new Date();
 
   const day = data.getDate();
   const month = data.getMonth() + 1;
