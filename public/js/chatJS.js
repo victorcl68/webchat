@@ -1,9 +1,9 @@
 const socket = window.io();
 
-const sendButton = document.querySelector('.sendButton');
+const sendMessageButton = document.querySelector('.sendMessageButton');
 const nicknameSaveButton = document.querySelector('.nicknameSaveButton');
-const chatMessageValue = document.querySelector('.messageInput');
-const nicknameValue = document.querySelector('.nicknameInput');
+const messageInput = document.querySelector('.messageInput');
+const nicknameInput = document.querySelector('.nicknameInput');
 
 const dataTestid = 'data-testid';
 let nickname = '';
@@ -11,15 +11,18 @@ let nickname = '';
 const createUsers = (users) => {
   const usersNicknames = Object.values(users);
   const onlineUsers = document.querySelector('.onlineUsers');
-  const onlineUser = document.querySelector('.onlineUser').innerHTML;
+  const onlineUser = document.querySelector('.onlineUser');
+  const onlineUserValue = onlineUser.innerHTML;
 
   onlineUsers.innerHTML = '';
 
   usersNicknames.forEach((eachNickname) => {
-    if (onlineUser !== eachNickname) {
+    if (onlineUserValue !== eachNickname) {
       const newUser = document.createElement('li');
+
       newUser.innerHTML = eachNickname;
       newUser.setAttribute(dataTestid, 'online-user');
+
       onlineUsers.appendChild(newUser);
     }
   });
@@ -37,11 +40,13 @@ const randomNickname = (length) => {
   }
 
   return result;
+  // inspiration by:
+  // https://qastack.com.br/programming/1349404/generate-random-string-characters-in-javascript
 };
 
 const createNickname = () => {
   const h1 = document.createElement('h1');
-  const titleDiv = document.querySelector('.titleDiv');
+  const titleSection = document.querySelector('.titleSection');
 
   h1.className = 'onlineUser';
   h1.innerText = nickname;
@@ -49,7 +54,7 @@ const createNickname = () => {
 
   sessionStorage.setItem('nickname', nickname);
 
-  titleDiv.appendChild(h1);
+  titleSection.appendChild(h1);
   return false;
 };
 
@@ -71,27 +76,33 @@ const createMessage = (message) => {
 };
 
 nicknameSaveButton.addEventListener('click', () => {
-  nickname = nicknameValue.value;
-  nicknameValue.value = '';
+  nickname = nicknameInput.value;
+  nicknameInput.value = '';
 
   deleteLastNickname();
   createNickname();
-  socket.emit('att', nickname);
+
+  socket.emit('updateNickname', nickname);
+
   return false;
 });
 
-sendButton.addEventListener('click', () => {
+sendMessageButton.addEventListener('click', () => {
   const onlineUser = sessionStorage.getItem('nickname');
+
+  let messageInputValue = messageInput.value;
+
   const timestamp = new Date();
   
   socket.emit('message', 
-    { chatMessage: chatMessageValue.value, nickname: onlineUser });
+    { chatMessage: messageInputValue, nickname: onlineUser });
 
   socket.emit('messageInfo', 
-    { message: chatMessageValue.value, nickname: onlineUser, timestamp });
+    { message: messageInputValue, nickname: onlineUser, timestamp });
   
-  chatMessageValue.value = '';
-  nicknameValue.value = '';
+  messageInputValue = '';
+  nicknameInput.value = '';
+
   return false;
 });
 
@@ -101,5 +112,6 @@ socket.on('users', (users) => createUsers(users));
 window.onload = () => {
   nickname = randomNickname(16);
   createNickname();
-  socket.emit('connection', { nickname: sessionStorage.getItem('nickname') });
+
+  socket.emit('connection', { nickname });
 };
