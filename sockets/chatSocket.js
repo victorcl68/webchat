@@ -15,7 +15,7 @@ module.exports = (io) => io.on('connection', (socket) => {
     await insertMessage(message);
     io.emit('message', message);
   });
-  socket.on('att', (nickname) => {
+  socket.on('updateNickname', (nickname) => {
     users[socket.id] = nickname;
     io.emit('users', users);
   });
