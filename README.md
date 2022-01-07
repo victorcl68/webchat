@@ -25,6 +25,7 @@ Um _chat_ online que ao ser utilizado o usuário é capaz de:
  - Visualizar o histórico de mensagens da conversa;
  - Visualizar os usuários online no momento;
  - Alterar o nome de usuário no chat em tempo real;
+ - Excluir todo o histórico de mensagens;
 
 ---
 
