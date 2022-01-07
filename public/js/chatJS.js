@@ -92,6 +92,7 @@ sendMessageButton.addEventListener('click', () => {
   const onlineUser = sessionStorage.getItem('nickname');
 
   let messageInputValue = messageInput.value;
+  messageInput.value = ''
 
   const timestamp = new Date();
   
