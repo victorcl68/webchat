@@ -49,7 +49,7 @@ const createNickname = () => {
   const titleSection = document.querySelector('.titleSection');
 
   h1.className = 'onlineUser';
-  h1.innerText = nickname;
+  h1.innerText = `Usuário Atual: ${nickname}`;
   h1.setAttribute(dataTestid, 'online-user');
 
   sessionStorage.setItem('nickname', nickname);

@@ -7,18 +7,20 @@
   <body>
     <section class="titleSection"></section>
 
+    <h2>Usuários Online</h2>
     <ul class="onlineUsers"></ul>
 
+    <h3>Mensagens</h3>
     <ul class="messages">
     <% allMessages.forEach(({ message }) => { %>
       <li data-testid="message"><%= message %></li>
     <% }) %>
     </ul>
 
-    <input type="text" class="nicknameInput" data-testid="nickname-box">
+    <input type="text" placeholder="Editar Usuário" class="nicknameInput" data-testid="nickname-box">
     <button class="nicknameSaveButton" data-testid="nickname-button">Salvar</button>
 
-    <input type="text" class="messageInput" data-testid="message-box">
+    <input type="text" placeholder="Mensagem" class="messageInput" data-testid="message-box">
     <button class="sendMessageButton" data-testid="send-button">Enviar</button>
   </body>
   <script src="/socket.io/socket.io.js"></script>
