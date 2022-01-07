@@ -8,7 +8,7 @@
 
 ---
 
-# Habilidades Trabalhadas
+# Habilidades trabalhadas
 
 - Desenvolvimento de um server socket usando o socket.io;
 
