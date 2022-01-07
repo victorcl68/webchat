@@ -1,3 +1,3 @@
-const nowDateFormatted = require('./nowDateFormatted');
+const currentDateFormatted = require('./currentDateFormatted');
 
-module.exports = { nowDateFormatted };
+module.exports = { currentDateFormatted };

@@ -1,4 +1,4 @@
-const { nowDateFormatted } = require('../utils');
+const { currentDateFormatted } = require('../utils');
 const { insertMessage } = require('../models');
 
 const users = {};
@@ -11,7 +11,7 @@ module.exports = (io) => io.on('connection', (socket) => {
     io.emit('users', users);
   });
   socket.on('message', async ({ nickname, chatMessage }) => {
-    const message = `${nowDateFormatted()} - ${nickname}: ${chatMessage}`;
+    const message = `${currentDateFormatted()} - ${nickname}: ${chatMessage}`;
     await insertMessage(message);
     io.emit('message', message);
   });
