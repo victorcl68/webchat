@@ -1,5 +1,5 @@
 const { currentDateFormatted } = require('../utils');
-const { getAllMessages, insertMessage, excludeAllMessages } = require('../models');
+const { insertMessage, excludeAllMessages } = require('../models');
 
 const users = {};
 // after many attempts I found this way to solve the problem of relating the socket id with the nickname 

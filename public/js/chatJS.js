@@ -109,8 +109,11 @@ sendMessageButton.addEventListener('click', () => {
 });
 
 excludeAllMessagesButton.addEventListener('click', () => {
-  socket.emit('excludeAllMessages')
-  window.location.reload()
+  const messagesCount = document.querySelector('.messages').childElementCount
+  if (messagesCount) {
+    socket.emit('excludeAllMessages')
+    window.location.reload()
+  }
 
   return false;
 });
