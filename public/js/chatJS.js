@@ -1,7 +1,9 @@
 const socket = window.io();
+const { excludeAllMessages } = require('../models');
 
 const sendMessageButton = document.querySelector('.sendMessageButton');
 const nicknameSaveButton = document.querySelector('.nicknameSaveButton');
+const excludeMessagesButton = document.querySelector('.excludeMessagesButton');
 const messageInput = document.querySelector('.messageInput');
 const nicknameInput = document.querySelector('.nicknameInput');
 
@@ -102,6 +104,12 @@ sendMessageButton.addEventListener('click', () => {
   
   messageInputValue = '';
   nicknameInput.value = '';
+
+  return false;
+});
+
+excludeMessagesButton.addEventListener('click', async () => {
+  await excludeAllMessages()
 
   return false;
 });

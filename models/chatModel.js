@@ -6,4 +6,7 @@ const getAllMessages = async () => connection()
 const insertMessage = async (message, nickname, timestamp) => connection()
   .then((db) => db.collection('messages').insertOne({ message, nickname, timestamp }));
 
-module.exports = { getAllMessages, insertMessage };
+const excludeAllMessages = async () => connection()
+  .then((db) => db.collection('messages').drop());
+
+module.exports = { getAllMessages, insertMessage, excludeAllMessages };
