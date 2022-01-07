@@ -1,5 +1,5 @@
 const { currentDateFormatted } = require('../utils');
-const { insertMessage } = require('../models');
+const { getAllMessages, insertMessage, excludeAllMessages } = require('../models');
 
 const users = {};
 // after many attempts I found this way to solve the problem of relating the socket id with the nickname 
@@ -18,6 +18,14 @@ module.exports = (io) => io.on('connection', (socket) => {
   socket.on('updateNickname', (nickname) => {
     users[socket.id] = nickname;
     io.emit('users', users);
+  });
+  socket.on('excludeAllMessages', async() => {
+    try {
+      await excludeAllMessages()
+      io.emit('excludeAllMessages')
+    } catch (error) {
+      console.log(error);
+    }
   });
   socket.on('disconnect', () => {
     delete users[socket.id];

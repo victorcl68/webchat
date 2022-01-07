@@ -1,9 +1,8 @@
 const socket = window.io();
-const { excludeAllMessages } = require('../models');
 
 const sendMessageButton = document.querySelector('.sendMessageButton');
 const nicknameSaveButton = document.querySelector('.nicknameSaveButton');
-const excludeMessagesButton = document.querySelector('.excludeMessagesButton');
+const excludeAllMessagesButton = document.querySelector('.excludeAllMessagesButton');
 const messageInput = document.querySelector('.messageInput');
 const nicknameInput = document.querySelector('.nicknameInput');
 
@@ -108,14 +107,16 @@ sendMessageButton.addEventListener('click', () => {
   return false;
 });
 
-excludeMessagesButton.addEventListener('click', async () => {
-  await excludeAllMessages()
+excludeAllMessagesButton.addEventListener('click', () => {
+  socket.emit('excludeAllMessages')
+  window.location.reload()
 
   return false;
 });
 
 socket.on('message', (message) => createMessage(message));
 socket.on('users', (users) => createUsers(users));
+socket.on('excludeAllMessages', () => {window.location.reload()});
 
 window.onload = () => {
   nickname = randomNickname(16);
